@@ -91,6 +91,7 @@ class JPA(
     }
 
     fun remover(id: Int) {
+
         val sql = """
             DELETE FROM caixa_da_agua 
             WHERE id = ?;
@@ -111,4 +112,31 @@ class JPA(
         }
     }
 
+    fun listarIds(): List<Int> {
+
+        val ids = mutableListOf<Int>()
+
+        val sql = """
+            SELECT id
+            FROM caixa_da_agua
+            ORDER BY id
+        """.trimIndent()
+
+        try {
+            conectar().use { conexao ->
+                conexao.prepareStatement(sql).use { comando ->
+                    comando.executeQuery().use { resultado ->
+                        while (resultado.next()) {
+                            ids.add(resultado.getInt("id"))
+                        }
+                    }
+                }
+            }
+        } catch (e: SQLException) {
+            println("Erro ao listar os ids: ${e.message}")
+        }
+
+        println("Ids existentes: $ids")
+        return ids
+    }
 }

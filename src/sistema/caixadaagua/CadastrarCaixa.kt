@@ -5,6 +5,8 @@ import enumeradores.Formato
 import enumeradores.Material
 import produto.CaixaDaAgua
 import repositorio.JPA
+import sistema.lerDouble
+import sistema.lerNumero
 import sistema.lerTexto
 
 fun cadastrarNovaCaixa() {
@@ -13,42 +15,36 @@ fun cadastrarNovaCaixa() {
 
     val fornecedor = lerTexto("Digite o Fornecedor")
 
-    val marca = lerTexto("Digite a marca")
+    val marca = lerTexto("Digite a Marca")
 
-    val modelo = lerTexto("Digite a modelo")
+    val modelo = lerTexto("Digite o Modelo")
 
     println("Cores: ")
     Cor.entries.forEach {
         println("${it.ordinal} - $it")
     }
-    println("Numero da cor: ")
-    val cor = readln().toInt()
+    val cor = lerNumero("Digite o n° da Cor")
 
     println("Materiais: ")
     Material.entries.forEach {
         println("${it.ordinal} - $it")
     }
-    println("Numero do material: ")
-    val material = readln().toInt()
+    val material = lerNumero("Digite o n° Material")
 
     println("Formatos: ")
     Formato.entries.forEach {
         println("${it.ordinal} - $it")
     }
-    println("Numero do formato: ")
-    val formato = readln().toInt()
+    val formato = lerNumero("Digite o n° Formato")
 
     println("Digite o preço: ")
     val preco = readln().toBigDecimal()
 
-    println("Digite a altura: ")
-    val altura = readln().toDouble()
+    val altura = lerDouble("Digite a Altura")
 
-    println("Digite a largura: ")
-    val largura = readln().toDouble()
+    val largura = lerDouble("Digite a Largura")
 
-    println("Digite a profundidade: ")
-    val profundidade = readln().toDouble()
+    val profundidade = lerDouble("Digite a Profundidade")
 
     val db = JPA()
     val id = db.salvar(

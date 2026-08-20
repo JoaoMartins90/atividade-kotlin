@@ -3,13 +3,20 @@ package sistema.caixadaagua
 import repositorio.JPA
 
 fun removerCaixa() {
-
-    println("Digite o ID da caixa que deseja remover: ")
-    val id = readln().toInt()
-
     val db = JPA()
 
-    db.remover(id)
+    val todosIds = db.listarIds()
+    print("Digite o ID da caixa que deseja remover: ")
+    val id = readln().toInt()
 
-    println("Caixa $id foi removida")
+    while (true) {
+        if (id in todosIds) {
+            db.remover(id)
+            println("Caixa $id foi removida")
+            return
+        }
+        print("Digite um Id existente")
+        return
+
+    }
 }
