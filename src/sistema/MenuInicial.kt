@@ -2,6 +2,7 @@ package sistema
 
 import sistema.caixadaagua.cadastrarNovaCaixa
 import sistema.caixadaagua.listarCaixa
+import sistema.caixadaagua.removerCaixa
 
 fun menuInicial() {
 
@@ -21,7 +22,7 @@ fun menuInicial() {
                 break
             }
             "1" -> cadastrarNovaCaixa()
-            "2" -> println("")
+            "2" -> removerCaixa()
             "3" -> println("")
             "4" -> listarCaixa()
             else -> println("Opção inválida!")

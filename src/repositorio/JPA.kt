@@ -90,5 +90,25 @@ class JPA(
         return caixas
     }
 
-    fun remover() {}
+    fun remover(id: Int) {
+        val sql = """
+            DELETE FROM caixa_da_agua 
+            WHERE id = ?;
+        """.trimIndent()
+
+        try {
+            conectar().use { conexao ->
+                conexao.prepareStatement(sql).use { comando ->
+                    comando.setInt(1, id)
+
+                    comando.executeUpdate()
+
+                    }
+                }
+
+        } catch (e: SQLException) {
+            println("Erro ao remover: ${e.message}")
+        }
+    }
+
 }
